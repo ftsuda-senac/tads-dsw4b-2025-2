@@ -7,8 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class ExemploController {
 
     private final GeradorSaida geradorSaida;
@@ -18,7 +19,6 @@ public class ExemploController {
     }
 
     @GetMapping(produces = "application/json")
-    @ResponseBody
     public String gerarJson(
             @RequestParam("nome") String nome,
             @RequestParam("email") String email) {
