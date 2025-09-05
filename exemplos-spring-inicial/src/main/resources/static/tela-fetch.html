@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Exemplo Fetch API</h1>
+    <button id="carregar">Carregar via Fetch API</button>
+    <p>Nome: <span id="nome"></span></p>
+    <p>E-mail: <span id="email"></span></p>
+    <p>Time: <span id="time"></span></p>
+    <p>Aleatório: <span id="aleatorio"></span></p>
+    <script>
+        async function obterDados(nome, email, time) {
+            const httpResp = await fetch(`/?nome=${nome}&email=${email}&time=${time}`);
+            if (!httpResp.ok) {
+                alert('Erro httpResp');
+                return;
+            }
+            const dados = await httpResp.json();
+            document.getElementById('nome').textContent = dados.nome;
+            document.getElementById('email').textContent = dados.email;
+            document.getElementById('time').textContent = dados.time;
+            document.getElementById('aleatorio').textContent = dados.aleatorio;
+        }
+
+        document.getElementById('carregar').onclick = () => {
+             obterDados('Ciclano', 'ciclano@teste.com.br', 'Bragantino');
+        }
+    </script>
+</body>
+</html>
