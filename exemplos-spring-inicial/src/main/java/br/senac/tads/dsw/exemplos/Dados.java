@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-public record Dados(String nome, String email, LocalDateTime dataHoraAtual) {
+public record Dados(String nome, String email, String time, String aleatorio, LocalDateTime dataHoraAtual) {
 
 }
 

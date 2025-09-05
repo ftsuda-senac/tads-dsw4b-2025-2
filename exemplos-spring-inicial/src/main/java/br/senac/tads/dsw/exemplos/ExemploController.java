@@ -9,20 +9,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @RestController
 public class ExemploController {
 
-    private final GeradorSaida geradorSaida;
-
-    public ExemploController(GeradorSaida geradorSaida) {
-        this.geradorSaida = geradorSaida;
-    }
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @GetMapping(produces = "application/json")
     public String gerarJson(
             @RequestParam("nome") String nome,
-            @RequestParam("email") String email) {
-        Dados dados = new Dados(nome, email, LocalDateTime.now());
-        return geradorSaida.gerarSaida(dados);
+            @RequestParam("email") String email,
+            @RequestParam("time") String time) {
+        Dados dados = new Dados(nome, email, time, "xpto1234", LocalDateTime.now());
+        try {
+            return objectMapper.writeValueAsString(dados);
+        } catch (JsonProcessingException e) {
+            return "{}";
+        }
     }
 }
