@@ -1,6 +1,13 @@
 package br.senac.tads.dsw.exemplos;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import org.springframework.cglib.core.Local;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 
 public record Dados(String nome, String email, LocalDateTime dataHoraAtual) {
@@ -34,5 +41,20 @@ public class Dados {
         return dataHoraAtual;
     }
     
+}
+*/
+
+/*
+// Exemplo de uso do Lombok
+@Getter
+@Setter
+@AllArgsConstructor
+public class Dados {
+
+    private String nome;
+
+    private String email;
+
+    private LocalDateTime dataHoraAtual;
 }
 */
