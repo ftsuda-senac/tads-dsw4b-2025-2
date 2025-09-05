@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ExemploController {
 
-    @Autowired
-    private GeradorSaida geradorSaida;
+    private final GeradorSaida geradorSaida;
+
+    public ExemploController(GeradorSaida geradorSaida) {
+        this.geradorSaida = geradorSaida;
+    }
 
     @GetMapping(produces = "application/json")
     @ResponseBody
