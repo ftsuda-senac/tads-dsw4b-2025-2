@@ -35,15 +35,20 @@ public class PessoaService {
     }
 
     public Pessoa addNew(Pessoa pessoa) {
-        return null;
+        mapPessoas.put(pessoa.getUsername(), pessoa);
+        return pessoa;
     }
 
     public Pessoa update(String username, Pessoa pessoa) {
-        return null;
+        if (!mapPessoas.containsKey(username)) {
+            // TODO: ERRO
+        }
+        mapPessoas.put(username, pessoa);
+        return pessoa;
     }
 
     public void delete(String username) {
-
+        mapPessoas.remove(username);
     }
 
 }
