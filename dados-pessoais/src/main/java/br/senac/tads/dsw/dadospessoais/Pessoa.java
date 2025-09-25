@@ -3,22 +3,42 @@ package br.senac.tads.dsw.dadospessoais;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 
 public class Pessoa {
 
+    @NotBlank // @NotNull + @NotEmpty
+    @Size(max = 64)
     private String username;
 
+    @NotBlank
+    @Size(max = 100)
     private String nome;
 
+    @PastOrPresent
     private LocalDate dataNascimento;
 
+    @NotBlank
+    @Size(max = 100)
+    @Email
     private String email;
 
+    @Size(max = 20)
     private String telefone;
 
+    @Size(min = 8)
+    @Pattern(regexp = "((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W]).{8,})")
     private String senha;
 
-    private List<String> interesses;
+    private String repeticaoSenha;
+
+    @Size(min = 1)
+    private List<@NotBlank String> interesses;
 
     public Pessoa() {
     }
@@ -31,6 +51,7 @@ public class Pessoa {
         this.email = email;
         this.telefone = telefone;
         this.senha = senha;
+        this.repeticaoSenha = senha;
         this.interesses = interesses;
     }
 
@@ -80,6 +101,14 @@ public class Pessoa {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getRepeticaoSenha() {
+        return repeticaoSenha;
+    }
+
+    public void setRepeticaoSenha(String repeticaoSenha) {
+        this.repeticaoSenha = repeticaoSenha;
     }
 
     public List<String> getInteresses() {
