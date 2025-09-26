@@ -3,17 +3,20 @@ package br.senac.tads.dsw.dadospessoais;
 import java.time.LocalDate;
 import java.util.List;
 
+import br.senac.tads.dsw.dadospessoais.validacao.SenhasIguais;
+import br.senac.tads.dsw.dadospessoais.validacao.UsernameUnico;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-
+@SenhasIguais
 public class Pessoa {
 
     @NotBlank // @NotNull + @NotEmpty
     @Size(max = 64)
+    @UsernameUnico
     private String username;
 
     @NotBlank
@@ -32,7 +35,9 @@ public class Pessoa {
     private String telefone;
 
     @Size(min = 8)
-    @Pattern(regexp = "((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W]).{8,})")
+    // Explicação da expressão regular abaixo em https://stackoverflow.com/a/18181478
+    // Teste de regex online: https://regex101.com/
+    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W]).{8,}")
     private String senha;
 
     private String repeticaoSenha;
