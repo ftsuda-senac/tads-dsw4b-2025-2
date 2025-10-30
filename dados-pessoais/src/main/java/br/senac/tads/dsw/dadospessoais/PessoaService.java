@@ -10,7 +10,7 @@ public interface PessoaService {
 
     Pessoa addNew(Pessoa pessoa);
 
-    Pessoa update(String username, Pessoa pessoa);
+    Pessoa update(String username, PessoaUpdateDto pessoa);
 
     void delete(String username);
 

@@ -70,12 +70,12 @@ public class PessoaRestController {
     @PutMapping("/{username}")
     public ResponseEntity<?> update(
             @PathVariable String username,
-            @RequestBody @Valid Pessoa pessoa) {
+            @RequestBody @Valid PessoaUpdateDto updateInput) {
         Pessoa p = service.findByUsername(username);
         if (p == null) {
             return ResponseEntity.notFound().build();
         }
-        p = service.update(username, pessoa);
+        p = service.update(username, updateInput);
         return ResponseEntity.noContent().build();
     }
 

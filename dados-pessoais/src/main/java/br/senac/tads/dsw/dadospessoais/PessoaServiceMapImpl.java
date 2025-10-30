@@ -42,10 +42,16 @@ public class PessoaServiceMapImpl implements PessoaService {
     }
 
     @Override
-    public Pessoa update(String username, Pessoa pessoa) {
+    public Pessoa update(String username, PessoaUpdateDto updateInput) {
         if (!mapPessoas.containsKey(username)) {
             // TODO: ERRO
         }
+        Pessoa pessoa = mapPessoas.get(username);
+        pessoa.setNome(updateInput.getNome());
+        pessoa.setDataNascimento(updateInput.getDataNascimento());
+        pessoa.setEmail(updateInput.getEmail());
+        pessoa.setTelefone(updateInput.getTelefone());
+        pessoa.setInteresses(updateInput.getInteresses());
         mapPessoas.put(username, pessoa);
         return pessoa;
     }

@@ -12,11 +12,19 @@ import jakarta.persistence.Table;
 public class InteresseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(unique = true, nullable = false, length = 100)
     private String nome;
+
+    public InteresseEntity() {
+
+    }
+
+    public InteresseEntity(Integer id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 
     public Integer getId() {
         return id;
