@@ -71,8 +71,8 @@ public class JwtService {
                 permissoes.add(new Permissao(p));
             }
             // CRIAR OBJETO COM DADOS DO USUARIO LOGADO
-            UsuarioSistema usuario = new UsuarioSistema(jwt.getClaimAsString("name"),
-                    username, null, permissoes);
+            UsuarioSistema usuario = new UsuarioSistema(username,
+                    jwt.getClaimAsString("name"), null, permissoes);
             return usuario;
         } catch (JwtException ex) {
             // log.warn("Validação do JWT falhou: {}", ex.getMessage());

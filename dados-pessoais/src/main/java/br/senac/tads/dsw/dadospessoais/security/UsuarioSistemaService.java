@@ -4,29 +4,43 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import jakarta.annotation.PostConstruct;
 
 @Service
 public class UsuarioSistemaService implements UserDetailsService {
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private Map<String, UsuarioSistema> mapUsuarios;
 
     public UsuarioSistemaService() {
-        mapUsuarios = new HashMap<>();
-        mapUsuarios.put("fulano", new UsuarioSistema("fulano",
-            "Fulano da Silva", "{noop}Abcd$1234",
-            List.of(new Permissao("PEAO"))));
-        mapUsuarios.put("ciclano", new UsuarioSistema("ciclano",
-            "Ciclano de Souza", "{noop}Abcd$1234",
-            List.of(new Permissao("GERENTE"))));
+
     }
 
+    @PostConstruct
+    private void init() {
+        mapUsuarios = new HashMap<>();
+        mapUsuarios.put("fulano", new UsuarioSistema("fulano",
+            "Fulano da Silva", passwordEncoder.encode("Abcd$1234"),
+            List.of(new Permissao("PEAO"))));
+        mapUsuarios.put("ciclano", new UsuarioSistema("ciclano",
+            "Ciclano de Souza", passwordEncoder.encode("Abcd$1234"),
+            List.of(new Permissao("GERENTE"))));
+        mapUsuarios.put("beltrana", new UsuarioSistema("beltrana",
+            "Beltrana dos Santos", passwordEncoder.encode("Abcd$1234"),
+            List.of(new Permissao("DIRETOR"))));
+    }
 
     @Override
-    public UserDetails loadUserByUsername(String username)
+    public UsuarioSistema loadUserByUsername(String username)
             throws UsernameNotFoundException {
         UsuarioSistema usuario = mapUsuarios.get(username);
         if (usuario == null) {
