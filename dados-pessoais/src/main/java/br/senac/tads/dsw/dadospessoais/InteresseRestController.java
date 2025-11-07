@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.senac.tads.dsw.dadospessoais.persistence.entities.InteresseEntity;
 import br.senac.tads.dsw.dadospessoais.persistence.repository.InteresseRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/interesses")
 @CrossOrigin(origins = "*")
+@SecurityRequirement(name = "bearer-jwt")
 public class InteresseRestController {
 
     @Autowired

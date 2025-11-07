@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 @RequestMapping("/pessoas")
 @CrossOrigin(origins = "*")
+@SecurityRequirement(name = "bearer-jwt")
 public class PessoaRestController {
 
     @Autowired
